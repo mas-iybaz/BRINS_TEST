@@ -1,0 +1,4 @@
+ALTER TABLE `db_brins_test`.`produksi` 
+ADD COLUMN `tanggal_transaksi` DATE NOT NULL AFTER `total_harga_penjualan`,
+ADD UNIQUE INDEX `no_trans_UNIQUE` (`no_trans` ASC);
+;

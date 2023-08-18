@@ -1,0 +1,17 @@
+CROSS:
+SELECT *
+FROM db_brins_test.barang
+CROSS JOIN db_brins_test.produksi
+ON db_brins_test.barang.kode_barang = db_brins_test.produksi.kode_barang;
+
+LEFT:
+SELECT *
+FROM db_brins_test.barang
+LEFT JOIN db_brins_test.produksi
+ON db_brins_test.barang.kode_barang = db_brins_test.produksi.kode_barang;
+
+RIGHT:
+SELECT *
+FROM db_brins_test.barang
+RIGHT JOIN db_brins_test.produksi
+ON db_brins_test.barang.kode_barang = db_brins_test.produksi.kode_barang;

@@ -1,0 +1,16 @@
+MAX:
+SELECT *
+FROM db_brins_test.produksi
+WHERE db_brins_test.produksi.total_harga_penjualan=(
+SELECT max(total_harga_penjualan)
+FROM db_brins_test.produksi
+);
+
+ORDER:
+SELECT *
+FROM db_brins_test.produksi
+ORDER BY tanggal_transaksi DESC;
+
+AVG:
+SELECT AVG(qty)
+FROM db_brins_test.produksi;

@@ -1,0 +1,14 @@
+CREATE TABLE `db_brins_test`.`barang` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `kode_barang` VARCHAR(45) NOT NULL,
+  `nama_barang` VARCHAR(45) NOT NULL,
+  `harga_barang` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `db_brins_test`.`produksi` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `no_trans` VARCHAR(45) NOT NULL,
+  `kode_barang` VARCHAR(45) NOT NULL,
+  `qty` VARCHAR(45) NOT NULL,
+  `total_harga_penjualan` INT(10) NOT NULL,
+  PRIMARY KEY (`id`));

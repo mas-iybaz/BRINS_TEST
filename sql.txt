@@ -1,0 +1,77 @@
+1.
+CREATE TABLE `db_brins_test`.`barang` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `kode_barang` VARCHAR(45) NOT NULL,
+  `nama_barang` VARCHAR(45) NOT NULL,
+  `harga_barang` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `db_brins_test`.`produksi` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `no_trans` VARCHAR(45) NOT NULL,
+  `kode_barang` VARCHAR(45) NOT NULL,
+  `qty` VARCHAR(45) NOT NULL,
+  `total_harga_penjualan` INT(10) NOT NULL,
+  PRIMARY KEY (`id`));
+
+2.
+ALTER TABLE `db_brins_test`.`produksi` 
+ADD COLUMN `tanggal_transaksi` DATE NOT NULL AFTER `total_harga_penjualan`,
+ADD UNIQUE INDEX `no_trans_UNIQUE` (`no_trans` ASC);
+;
+
+3.
+INSERT INTO `db_brins_test`.`barang` (`kode_barang`, `nama_barang`, `harga_barang`) VALUES ('ATK-001', 'Buku', '5000');
+INSERT INTO `db_brins_test`.`barang` (`kode_barang`, `nama_barang`, `harga_barang`) VALUES ('ATK-002', 'Pulpen', '3000');
+INSERT INTO `db_brins_test`.`barang` (`kode_barang`, `nama_barang`, `harga_barang`) VALUES ('ATK-003', 'Pensil', '3000');
+INSERT INTO `db_brins_test`.`barang` (`kode_barang`, `nama_barang`, `harga_barang`) VALUES ('KBS-001', 'Tas', '150000');
+INSERT INTO `db_brins_test`.`barang` (`kode_barang`, `nama_barang`, `harga_barang`) VALUES ('KBS-002', 'Sepatu', '120000');
+
+INSERT INTO `db_brins_test`.`produksi` (`no_trans`, `kode_barang`, `qty`, `total_harga_penjualan`, `tanggal_transaksi`) VALUES ('TRX-001', 'ATK-002', '2', '6000', '2023-08-10');
+INSERT INTO `db_brins_test`.`produksi` (`no_trans`, `kode_barang`, `qty`, `total_harga_penjualan`, `tanggal_transaksi`) VALUES ('TRX-002', 'ATK-001', '3', '15000', '2023-08-10');
+INSERT INTO `db_brins_test`.`produksi` (`no_trans`, `kode_barang`, `qty`, `total_harga_penjualan`, `tanggal_transaksi`) VALUES ('TRX-003', 'ATK-003', '4', '12000', '2023-08-11');
+INSERT INTO `db_brins_test`.`produksi` (`no_trans`, `kode_barang`, `qty`, `total_harga_penjualan`, `tanggal_transaksi`) VALUES ('TRX-004', 'ATK-001', '2', '10000', '2023-08-11');
+INSERT INTO `db_brins_test`.`produksi` (`no_trans`, `kode_barang`, `qty`, `total_harga_penjualan`, `tanggal_transaksi`) VALUES ('TRX-005', 'KBS-002', '1', '120000', '2023-08-12');
+INSERT INTO `db_brins_test`.`produksi` (`no_trans`, `kode_barang`, `qty`, `total_harga_penjualan`, `tanggal_transaksi`) VALUES ('TRX-006', 'KBS-002', '1', '120000', '2023-08-14');
+INSERT INTO `db_brins_test`.`produksi` (`no_trans`, `kode_barang`, `qty`, `total_harga_penjualan`, `tanggal_transaksi`) VALUES ('TRX-007', 'KBS-001', '1', '150000', '2023-08-15');
+INSERT INTO `db_brins_test`.`produksi` (`no_trans`, `kode_barang`, `qty`, `total_harga_penjualan`, `tanggal_transaksi`) VALUES ('TRX-008', 'ATK-002', '3', '9000', '2023-08-16');
+
+4.
+CROSS:
+SELECT *
+FROM db_brins_test.barang
+CROSS JOIN db_brins_test.produksi
+ON db_brins_test.barang.kode_barang = db_brins_test.produksi.kode_barang;
+
+LEFT:
+SELECT *
+FROM db_brins_test.barang
+LEFT JOIN db_brins_test.produksi
+ON db_brins_test.barang.kode_barang = db_brins_test.produksi.kode_barang;
+
+RIGHT:
+SELECT *
+FROM db_brins_test.barang
+RIGHT JOIN db_brins_test.produksi
+ON db_brins_test.barang.kode_barang = db_brins_test.produksi.kode_barang;
+
+5.
+MAX:
+SELECT *
+FROM db_brins_test.produksi
+WHERE db_brins_test.produksi.total_harga_penjualan=(
+SELECT max(total_harga_penjualan)
+FROM db_brins_test.produksi
+);
+
+ORDER:
+SELECT *
+FROM db_brins_test.produksi
+ORDER BY tanggal_transaksi DESC;
+
+AVG:
+SELECT AVG(qty)
+FROM db_brins_test.produksi;
+
+9.
+mysqldump -u root -p aziz db_brins_test > db_brins_test_backup.sql

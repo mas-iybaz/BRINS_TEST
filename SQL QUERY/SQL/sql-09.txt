@@ -1,0 +1,1 @@
+mysqldump -u root -p aziz db_brins_test > db_brins_test_backup.sql
